@@ -1,3 +1,0 @@
-# IP o dominio de tu servidor backend
-# Cambia este valor y todo el frontend se actualiza automáticamente
-VITE_API_HOST=172.176.184.214

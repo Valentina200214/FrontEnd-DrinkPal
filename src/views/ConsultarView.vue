@@ -109,7 +109,7 @@ export default {
       try {
         const token = localStorage.getItem('token')
         if (!token) return
-        const res = await axios.get(`http://${import.meta.env.VITE_API_HOST}:3000/me`, {
+        const res = await axios.get('http://'+process.env.VITE_API_HOST+':3000/me', {
           headers: { 'x-auth-token': token }
         })
         if (res.data && res.data.metaConsumoMl > 0) {
@@ -139,7 +139,7 @@ export default {
         if (!token || !userId) return
  
         const res = await axios.get(
-          `http://${import.meta.env.VITE_API_HOST}:3000/usuarios/${userId}/consumos`,
+          'http://'+process.env.VITE_API_HOST+':3000/usuarios/${userId}/consumos',
           { headers: { 'x-auth-token': token } }
         )
  
@@ -193,7 +193,7 @@ export default {
         const d = new Date(c.fechaHora)
 
         const key =
-          `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+          '${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}'
 
         porDia[key] = (porDia[key] || 0) + c.consumoInstante
       })
@@ -220,10 +220,10 @@ export default {
           : 0
 
       return {
-        total: `${totalMl.toLocaleString('es-CO')} ml`,
-        promedio: `${promedioMl.toLocaleString('es-CO')} ml/día`,
-        diasMeta: `${diasMeta} de ${totalDias} días`,
-        porcentaje: `${rawPct}%`,
+        total: '${totalMl.toLocaleString('es-CO')} ml',
+        promedio: '${promedioMl.toLocaleString('es-CO')} ml/día',
+        diasMeta: '${diasMeta} de ${totalDias} días',
+        porcentaje: '${rawPct}%',
         rawPct
       }
     }

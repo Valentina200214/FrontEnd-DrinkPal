@@ -155,7 +155,7 @@ export default {
       if (this.racha < 3)   return '¡Buen inicio! Mantén el ritmo los próximos días.'
       if (this.racha < 7)   return '¡Vas muy bien! Aguanta hasta los 7 días para el logro "Constante".'
       if (this.racha === 7) return '🏆 ¡Lograste el logro "Constante"! ¡Una semana perfecta!'
-      return `¡Increíble! Llevas ${this.racha} días consecutivos cumpliendo tu meta. ¡Imparable!`
+      return '¡Increíble! Llevas ${this.racha} días consecutivos cumpliendo tu meta. ¡Imparable!'
     }
   },
   methods: {
@@ -166,7 +166,7 @@ export default {
         const userId = localStorage.getItem('userId')
 
         await axios.post(
-          `http://${import.meta.env.VITE_API_HOST}:3000/consumos`,
+          'http://'+process.env.VITE_API_HOST+':3000/consumos',
           { usuarioFinal: userId, consumoInstante: ml },
           { headers: { 'x-auth-token': token } }
         )
