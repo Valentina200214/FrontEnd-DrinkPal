@@ -166,7 +166,7 @@ export default {
         const userId = localStorage.getItem('userId')
 
         await axios.post(
-          `http://'+process.env.VITE_API_HOST+':3000/consumos`,
+          `http://${process.env.VUE_APP_API_HOST}:3000/consumos`,
           { usuarioFinal: userId, consumoInstante: ml },
           { headers: { 'x-auth-token': token } }
         )

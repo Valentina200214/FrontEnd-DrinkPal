@@ -208,11 +208,11 @@ export default {
         // Traer consumos de la semana y racha en paralelo
         const [semanaRes, rachaRes] = await Promise.all([
           axios.get(
-            `http://'+process.env.VITE_API_HOST+':3000/usuarios/${userId}/consumos/semana`,
+            `http://${process.env.VUE_APP_API_HOST}:3000/usuarios/${userId}/consumos/semana`,
             { headers: { 'x-auth-token': token } }
           ),
           axios.get(
-            `http://'+process.env.VITE_API_HOST+':3000/usuarios/${userId}/racha`,
+            `http://${process.env.VUE_APP_API_HOST}:3000/usuarios/${userId}/racha`,
             { headers: { 'x-auth-token': token } }
           )
         ])

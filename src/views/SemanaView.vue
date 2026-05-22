@@ -136,7 +136,7 @@ export default {
         if (!token || !userId) return
 
         const response = await axios.get(
-          `http://'+process.env.VITE_API_HOST+':3000/usuarios/${userId}/consumos/semana`,
+          `http://${process.env.VUE_APP_API_HOST}:3000/usuarios/${userId}/consumos/semana`,
           { headers: { 'x-auth-token': token } }
         )
 
