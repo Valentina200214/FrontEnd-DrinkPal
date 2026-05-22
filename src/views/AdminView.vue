@@ -281,7 +281,7 @@
           <!-- TABLA PRODUCTOS -->
           <div class="table-wrapper" v-if="mostrarTablaProductos && productosData.length > 0">
             <p class="productos-subtitulo">
-              {{ tipoProductos === 'disponibles' ? '🟢 Productos disponibles (${productosData.length})' : '🔴 Productos en uso (${productosData.length})' }}
+              {{ tipoProductos === 'disponibles' ? `🟢 Productos disponibles (${productosData.length})` : `🔴 Productos en uso (${productosData.length})` }}
             </p>
 
             <div class="table-scroll table-scroll-sm">
@@ -497,7 +497,7 @@ export default {
         const token = localStorage.getItem('token')
         if (!token) return
 
-        const res = await axios.get('http://'+process.env.VITE_API_HOST+':3000/me', {
+        const res = await axios.get(`http://'+process.env.VITE_API_HOST+':3000/me`, {
           headers: { 'x-auth-token': token }
         })
 
@@ -532,17 +532,17 @@ export default {
         const token = localStorage.getItem('token')
 
         await axios.post(
-          'http://'+process.env.VITE_API_HOST+':3000/productos',
+          `http://'+process.env.VITE_API_HOST+':3000/productos`,
           { id_producto: this.productId.trim() },
           { headers: { 'x-auth-token': token } }
         )
 
-        this.mensajeProducto = '✅ Producto ${this.productId.trim()} creado correctamente'
+        this.mensajeProducto = `✅ Producto ${this.productId.trim()} creado correctamente`
         this.productId = ''
 
       } catch (e) {
         if (e.response && e.response.data && e.response.data.msg) {
-          this.mensajeProducto = '❌ ${e.response.data.msg}'
+          this.mensajeProducto = `❌ ${e.response.data.msg}`
         } else {
           this.mensajeProducto = '❌ Error al crear el producto'
         }
@@ -561,7 +561,7 @@ export default {
       }
 
       const confirmado = confirm(
-        '¿Seguro que deseas eliminar al usuario "${this.userCorreo.trim()}"?\nEsta acción no se puede deshacer.'
+        `¿Seguro que deseas eliminar al usuario "${this.userCorreo.trim()}"?\nEsta acción no se puede deshacer.`
       )
       if (!confirmado) return
 
@@ -569,14 +569,14 @@ export default {
         const token = localStorage.getItem('token')
 
         const res = await axios.delete(
-          'http://'+process.env.VITE_API_HOST+':3000/admin/usuarios/por-correo',
+          `http://'+process.env.VITE_API_HOST+':3000/admin/usuarios/por-correo`,
           {
             headers: { 'x-auth-token': token },
             data: { correo: this.userCorreo.trim() }
           }
         )
 
-        this.mensajeUsuario = '✅ ${res.data.msg}'
+        this.mensajeUsuario = `✅ ${res.data.msg}`
         this.userCorreo = ''
 
       } catch (e) {
@@ -597,7 +597,7 @@ export default {
           if (esErrorInterno) {
             this.mensajeUsuario = '❌ No se encontró ningún usuario con ese correo'
           } else {
-            this.mensajeUsuario = '❌ ${msg}'
+            this.mensajeUsuario = `❌ ${msg}`
           }
         } else if (e.response && e.response.status === 404) {
           this.mensajeUsuario = '❌ No se encontró ningún usuario con ese correo'
@@ -626,7 +626,7 @@ export default {
         if (this.filtroUsuario.trim())  params.correo       = this.filtroUsuario.trim()
         if (this.filtroProducto.trim()) params.id_producto  = this.filtroProducto.trim()
 
-        const res = await axios.get('http://'+process.env.VITE_API_HOST+':3000/admin/consumos', {
+        const res = await axios.get(`http://'+process.env.VITE_API_HOST+':3000/admin/consumos`, {
           headers: { 'x-auth-token': token },
           params
         })
@@ -637,7 +637,7 @@ export default {
           nombre:     c.usuarioFinal ? c.usuarioFinal.nombre      : '-',
           correo:     c.usuarioFinal ? c.usuarioFinal.correo      : '-',
           idProducto: c.usuarioFinal ? c.usuarioFinal.id_producto : '-',
-          consumo:    '${c.consumoInstante} ml',
+          consumo:    `${c.consumoInstante} ml`,
           racha:      c.racha ?? 0,
           fecha:      new Date(c.fechaHora).toLocaleString('es-CO')
         }))
@@ -671,7 +671,7 @@ export default {
       try {
         const token = localStorage.getItem('token')
 
-        const res = await axios.get('http://'+process.env.VITE_API_HOST+':3000/admin/usuarios-resumen', {
+        const res = await axios.get(`http://'+process.env.VITE_API_HOST+':3000/admin/usuarios-resumen`, {
           headers: { 'x-auth-token': token }
         })
 
@@ -681,7 +681,7 @@ export default {
           nombre:     u.nombre     || '-',
           correo:     u.correo     || '-',
           idProducto: u.idProducto || '-',
-          consumo:    '${u.consumoTotal ?? 0} ml',
+          consumo:    `${u.consumoTotal ?? 0} ml`,
           racha:      u.racha      ?? 0,
           fecha:      u.fechaRegistro
             ? new Date(u.fechaRegistro).toLocaleDateString('es-CO')
@@ -720,8 +720,8 @@ export default {
         const token = localStorage.getItem('token')
 
         const endpoint = tipo === 'disponibles'
-          ? 'http://'+process.env.VITE_API_HOST+':3000/admin/productos/disponibles'
-          : 'http://'+process.env.VITE_API_HOST+':3000/admin/productos/en-uso'
+          ? `http://'+process.env.VITE_API_HOST+':3000/admin/productos/disponibles`
+          : `http://'+process.env.VITE_API_HOST+':3000/admin/productos/en-uso`
 
         const res = await axios.get(endpoint, {
           headers: { 'x-auth-token': token }
@@ -731,7 +731,7 @@ export default {
         this.mostrarTablaProductos = true
 
         if (this.productosData.length === 0) {
-          this.mensajeProductosConsulta = '⚠️ No hay productos ${tipo === 'disponibles' ? 'disponibles' : 'en uso'} actualmente.'
+          this.mensajeProductosConsulta = `⚠️ No hay productos ${tipo === 'disponibles' ? 'disponibles' : 'en uso'} actualmente.`
         }
 
       } catch (e) {
@@ -758,12 +758,12 @@ export default {
       ]
 
       const filas = this.registros.map(r => [
-        '"${r.nombre}"',
-        '"${r.correo}"',
-        '"${r.idProducto}"',
-        '"${r.consumo}"',
-        '"${r.racha}"',
-        '"${r.fecha}"'
+        `"${r.nombre}"`,
+        `"${r.correo}"`,
+        `"${r.idProducto}"`,
+        `"${r.consumo}"`,
+        `"${r.racha}"`,
+        `"${r.fecha}"`
       ])
 
       const csvContent = [encabezados.join(','), ...filas.map(f => f.join(','))].join('\n')
@@ -773,7 +773,7 @@ export default {
       const link = document.createElement('a')
       const fecha = new Date().toISOString().slice(0, 10)
       link.href = url
-      link.setAttribute('download', 'drinkpal_${this.modoTabla}_${fecha}.csv')
+      link.setAttribute('download', `drinkpal_${this.modoTabla}_${fecha}.csv`)
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
@@ -805,7 +805,7 @@ export default {
         const token = localStorage.getItem('token')
 
         const res = await axios.post(
-          'http://'+process.env.VITE_API_HOST+':3000/admin/crear-admin',
+          `http://'+process.env.VITE_API_HOST+':3000/admin/crear-admin`,
           {
             correo: this.newAdmin.correo.trim(),
             nombre: this.newAdmin.nombre.trim(),
@@ -814,13 +814,13 @@ export default {
           { headers: { 'x-auth-token': token } }
         )
 
-        this.mensajeNuevoAdmin = '✅ ${res.data.msg}'
+        this.mensajeNuevoAdmin = `✅ ${res.data.msg}`
         this.newAdmin = { correo: '', nombre: '', clave: '' }
 
       } catch (e) {
         console.error('Error al crear admin:', e)
         if (e.response && e.response.data && e.response.data.msg) {
-          this.mensajeNuevoAdmin = '❌ ${e.response.data.msg}'
+          this.mensajeNuevoAdmin = `❌ ${e.response.data.msg}`
         } else {
           this.mensajeNuevoAdmin = '❌ Error al crear el administrador'
         }

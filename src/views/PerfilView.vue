@@ -202,7 +202,7 @@ export default {
 
         // Ruta correcta del backend: PUT /usuarios/:id/meta
         await axios.put(
-          'http://'+process.env.VITE_API_HOST+':3000/usuarios/${userId}/meta',
+          `http://'+process.env.VITE_API_HOST+':3000/usuarios/${userId}/meta`,
           { metaConsumoMl: this.metaDiariaInput },
           { headers: { 'x-auth-token': token } }
         )
