@@ -199,7 +199,7 @@ export default {
     },
     async leerBateria() {
       try {
-        const response = await axios.get('http://localhost:3000/bateria')
+        const response = await axios.get(`http://${import.meta.env.VITE_API_HOST}:3000/bateria`)
         console.log(response.data)
         this.nivel = response.data.voltaje
       } catch (error) {
@@ -214,7 +214,7 @@ export default {
         if (!token) return
 
         const response = await axios.get(
-          'http://localhost:3000/me',
+          `http://${import.meta.env.VITE_API_HOST}:3000/me`,
           { headers: { 'x-auth-token': token } }
         )
         const u = response.data
@@ -246,7 +246,7 @@ export default {
     async login_fcn() {
       try {
         const userData = { correo: this.loginUser, clave: this.loginPass }
-        const response = await axios.post('http://localhost:3000/login', userData)
+        const response = await axios.post(`http://${import.meta.env.VITE_API_HOST}:3000/login`, userData)
 
         this.mensajelogin = ''
         localStorage.setItem('token', response.data.token)
@@ -292,7 +292,7 @@ export default {
         if (!token || !userId) return
 
         const response = await axios.get(
-          `http://localhost:3000/usuarios/${userId}/racha`,
+          `http://${import.meta.env.VITE_API_HOST}:3000/usuarios/${userId}/racha`,
           { headers: { 'x-auth-token': token } }
         )
         console.log(response.data.racha)
@@ -312,7 +312,7 @@ export default {
           telefono:    this.regTel,
           localidad:   this.regUbi
         }
-        const response = await axios.post('http://localhost:3000/usuarios', userData)
+        const response = await axios.post(`http://${import.meta.env.VITE_API_HOST}:3000/usuarios`, userData)
         const { token, _id } = response.data
         localStorage.setItem('token', token)
         localStorage.setItem('userId', _id)
@@ -335,7 +335,7 @@ export default {
         if (!token || !userId) return
 
         const response = await axios.get(
-          `http://localhost:3000/usuarios/${userId}/consumos/hoy`,
+          `http://${import.meta.env.VITE_API_HOST}:3000/usuarios/${userId}/consumos/hoy`,
           { headers: { 'x-auth-token': token } }
         )
         this.waterToday = response.data.total ?? 0

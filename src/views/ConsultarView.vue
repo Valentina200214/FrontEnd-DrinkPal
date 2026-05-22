@@ -109,7 +109,7 @@ export default {
       try {
         const token = localStorage.getItem('token')
         if (!token) return
-        const res = await axios.get('http://localhost:3000/me', {
+        const res = await axios.get(`http://${import.meta.env.VITE_API_HOST}:3000/me`, {
           headers: { 'x-auth-token': token }
         })
         if (res.data && res.data.metaConsumoMl > 0) {
@@ -139,7 +139,7 @@ export default {
         if (!token || !userId) return
  
         const res = await axios.get(
-          `http://localhost:3000/usuarios/${userId}/consumos`,
+          `http://${import.meta.env.VITE_API_HOST}:3000/usuarios/${userId}/consumos`,
           { headers: { 'x-auth-token': token } }
         )
  

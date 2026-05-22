@@ -497,7 +497,7 @@ export default {
         const token = localStorage.getItem('token')
         if (!token) return
 
-        const res = await axios.get('http://localhost:3000/me', {
+        const res = await axios.get(`http://${import.meta.env.VITE_API_HOST}:3000/me`, {
           headers: { 'x-auth-token': token }
         })
 
@@ -532,7 +532,7 @@ export default {
         const token = localStorage.getItem('token')
 
         await axios.post(
-          'http://localhost:3000/productos',
+          `http://${import.meta.env.VITE_API_HOST}:3000/productos`,
           { id_producto: this.productId.trim() },
           { headers: { 'x-auth-token': token } }
         )
@@ -569,7 +569,7 @@ export default {
         const token = localStorage.getItem('token')
 
         const res = await axios.delete(
-          'http://localhost:3000/admin/usuarios/por-correo',
+          `http://${import.meta.env.VITE_API_HOST}:3000/admin/usuarios/por-correo`,
           {
             headers: { 'x-auth-token': token },
             data: { correo: this.userCorreo.trim() }
@@ -626,7 +626,7 @@ export default {
         if (this.filtroUsuario.trim())  params.correo       = this.filtroUsuario.trim()
         if (this.filtroProducto.trim()) params.id_producto  = this.filtroProducto.trim()
 
-        const res = await axios.get('http://localhost:3000/admin/consumos', {
+        const res = await axios.get(`http://${import.meta.env.VITE_API_HOST}:3000/admin/consumos`, {
           headers: { 'x-auth-token': token },
           params
         })
@@ -671,7 +671,7 @@ export default {
       try {
         const token = localStorage.getItem('token')
 
-        const res = await axios.get('http://localhost:3000/admin/usuarios-resumen', {
+        const res = await axios.get(`http://${import.meta.env.VITE_API_HOST}:3000/admin/usuarios-resumen`, {
           headers: { 'x-auth-token': token }
         })
 
@@ -720,8 +720,8 @@ export default {
         const token = localStorage.getItem('token')
 
         const endpoint = tipo === 'disponibles'
-          ? 'http://localhost:3000/admin/productos/disponibles'
-          : 'http://localhost:3000/admin/productos/en-uso'
+          ? `http://${import.meta.env.VITE_API_HOST}:3000/admin/productos/disponibles`
+          : `http://${import.meta.env.VITE_API_HOST}:3000/admin/productos/en-uso`
 
         const res = await axios.get(endpoint, {
           headers: { 'x-auth-token': token }
@@ -805,7 +805,7 @@ export default {
         const token = localStorage.getItem('token')
 
         const res = await axios.post(
-          'http://localhost:3000/admin/crear-admin',
+          `http://${import.meta.env.VITE_API_HOST}:3000/admin/crear-admin`,
           {
             correo: this.newAdmin.correo.trim(),
             nombre: this.newAdmin.nombre.trim(),
