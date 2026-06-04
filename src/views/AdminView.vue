@@ -497,7 +497,7 @@ export default {
         const token = localStorage.getItem('token')
         if (!token) return
 
-        const res = await axios.get(`http://${process.env.VUE_APP_API_HOST}:3000/me`, {
+        const res = await axios.get(`https://${process.env.VUE_APP_API_HOST}/me`, {
           headers: { 'x-auth-token': token }
         })
 
@@ -532,7 +532,7 @@ export default {
         const token = localStorage.getItem('token')
 
         await axios.post(
-          `http://${process.env.VUE_APP_API_HOST}:3000/productos`,
+          `https://${process.env.VUE_APP_API_HOST}/productos`,
           { id_producto: this.productId.trim() },
           { headers: { 'x-auth-token': token } }
         )
@@ -569,7 +569,7 @@ export default {
         const token = localStorage.getItem('token')
 
         const res = await axios.delete(
-          `http://${process.env.VUE_APP_API_HOST}:3000/admin/usuarios/por-correo`,
+          `https://${process.env.VUE_APP_API_HOST}/admin/usuarios/por-correo`,
           {
             headers: { 'x-auth-token': token },
             data: { correo: this.userCorreo.trim() }
@@ -626,7 +626,7 @@ export default {
         if (this.filtroUsuario.trim())  params.correo       = this.filtroUsuario.trim()
         if (this.filtroProducto.trim()) params.id_producto  = this.filtroProducto.trim()
 
-        const res = await axios.get(`http://${process.env.VUE_APP_API_HOST}:3000/admin/consumos`, {
+        const res = await axios.get(`https://${process.env.VUE_APP_API_HOST}/admin/consumos`, {
           headers: { 'x-auth-token': token },
           params
         })
@@ -671,7 +671,7 @@ export default {
       try {
         const token = localStorage.getItem('token')
 
-        const res = await axios.get(`http://${process.env.VUE_APP_API_HOST}:3000/admin/usuarios-resumen`, {
+        const res = await axios.get(`https://${process.env.VUE_APP_API_HOST}/admin/usuarios-resumen`, {
           headers: { 'x-auth-token': token }
         })
 
@@ -720,8 +720,8 @@ export default {
         const token = localStorage.getItem('token')
 
         const endpoint = tipo === 'disponibles'
-          ? `http://${process.env.VUE_APP_API_HOST}:3000/admin/productos/disponibles`
-          : `http://${process.env.VUE_APP_API_HOST}:3000/admin/productos/en-uso`
+          ? `https://${process.env.VUE_APP_API_HOST}/admin/productos/disponibles`
+          : `https://${process.env.VUE_APP_API_HOST}/admin/productos/en-uso`
 
         const res = await axios.get(endpoint, {
           headers: { 'x-auth-token': token }
@@ -805,7 +805,7 @@ export default {
         const token = localStorage.getItem('token')
 
         const res = await axios.post(
-          `http://${process.env.VUE_APP_API_HOST}:3000/admin/crear-admin`,
+          `https://${process.env.VUE_APP_API_HOST}/admin/crear-admin`,
           {
             correo: this.newAdmin.correo.trim(),
             nombre: this.newAdmin.nombre.trim(),
